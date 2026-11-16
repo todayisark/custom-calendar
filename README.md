@@ -22,17 +22,17 @@ pnpm dlx shadcn@latest add http://localhost:3000/r/calendar.json
 ## Usage
 
 ```tsx
-import { Calendar } from "@/components/ui/calendar"
+import { Calendar } from '@/components/ui/calendar';
 
 export function DiaryCalendar() {
   return (
     <Calendar
-      locale="zh-CN"
+      locale='zh-CN'
       weekStartsOn={0}
       classNames={{
-        day: "min-h-24 border p-2",
-        dayOutside: "opacity-30",
-        dayToday: "ring-2 ring-primary",
+        day: 'min-h-24 border p-2',
+        dayOutside: 'opacity-30',
+        dayToday: 'ring-2 ring-primary',
       }}
       renderDay={({ date, dateKey, isCurrentMonth, isToday }) => (
         <article>
@@ -42,10 +42,10 @@ export function DiaryCalendar() {
         </article>
       )}
       onDayClick={({ date, dateKey }) => {
-        console.log(date, dateKey)
+        console.log(date, dateKey);
       }}
     />
-  )
+  );
 }
 ```
 

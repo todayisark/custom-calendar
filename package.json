@@ -5,12 +5,25 @@
   "type": "module",
   "scripts": {
     "build": "shadcn build",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.0",
     "@types/react": "^19.2.0",
+    "eslint": "^10.0.0",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-react-hooks": "latest",
+    "eslint-plugin-unused-imports": "latest",
+    "globals": "latest",
+    "prettier": "latest",
     "react": "^19.2.0",
     "shadcn": "latest",
-    "typescript": "^5.9.0"
+    "typescript": "^5.9.0",
+    "typescript-eslint": "latest"
   }
 }

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "custom-calendar",
+  "homepage": "https://github.com/todayisark/custom-calendar",
+  "items": [
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Custom Calendar",
+      "description": "An unstyled, render-first monthly calendar for fully custom day content.",
+      "files": [
+        {
+          "path": "registry/default/calendar/calendar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/calendar.tsx"
+        }
+      ]
+    }
+  ]
+}

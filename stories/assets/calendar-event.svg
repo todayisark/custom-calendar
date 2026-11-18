@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 40" role="img" aria-labelledby="title">
+  <title id="title">Blue calendar event illustration</title>
+  <rect width="64" height="40" rx="8" fill="#dbeafe"/>
+  <circle cx="20" cy="20" r="9" fill="#2563eb"/>
+  <path d="M36 14h18M36 20h14M36 26h10" stroke="#1e3a8a" stroke-width="3" stroke-linecap="round"/>
+</svg>

@@ -7,11 +7,10 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
-    ignores: ['node_modules/**', 'public/r/**'],
+    ignores: ['node_modules/**', 'public/r/**', 'storybook-static/**'],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
-  reactHooks.configs.flat.recommended,
   reactHooks.configs.flat.recommended,
   {
     files: ['**/*.{js,mjs,cjs,ts,tsx}'],

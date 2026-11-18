@@ -1,3 +1,4 @@
 node_modules
 public/r
+storybook-static
 package-lock.json

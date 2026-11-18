@@ -62,3 +62,9 @@ export function DiaryCalendar() {
 - `classNames`: classes for individual structural parts.
 
 The grid has as many complete weeks as the displayed month requires, so it naturally switches between five and six rows.
+
+## Development
+
+Use `npm run storybook` to develop the component in isolation and `npm run check` for the
+baseline quality gate. Browser-based Story checks are available through `npm run test:browser`.
+See [DEVELOPMENT.md](./DEVELOPMENT.md) for the complete workflow.

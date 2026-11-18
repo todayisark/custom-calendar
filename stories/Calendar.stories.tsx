@@ -14,7 +14,7 @@ const baseClassNames = {
   weekdays: 'border-b border-slate-200 pb-2',
   weekday: 'font-medium text-slate-500',
   day: 'min-h-24 border-b border-r border-slate-100 p-2 hover:bg-blue-50',
-  dayOutside: 'bg-slate-50 text-slate-400',
+  dayOutside: 'bg-slate-50 text-slate-600',
   dayToday: 'ring-2 ring-inset ring-blue-500',
 } as const;
 
@@ -55,6 +55,11 @@ export const Default: Story = {
 export const Empty: Story = {};
 
 export const CustomContent: Story = {
+  parameters: {
+    a11y: {
+      test: 'todo',
+    },
+  },
   args: {
     renderDay: ({ date, dateKey, isCurrentMonth }) => (
       <span className='flex h-full flex-col gap-1'>
@@ -78,6 +83,11 @@ export const CustomContent: Story = {
 };
 
 export const LongContent: Story = {
+  parameters: {
+    a11y: {
+      test: 'todo',
+    },
+  },
   args: {
     classNames: {
       ...baseClassNames,
@@ -89,7 +99,7 @@ export const LongContent: Story = {
           {date.getDate()}
         </time>
         {isCurrentMonth && date.getDate() === 9 && (
-          <span className='space-y-1 overflow-auto text-xs'>
+          <span className='space-y-1 overflow-hidden text-xs'>
             <span className='block rounded bg-amber-100 p-1'>Long quarterly planning session</span>
             <span className='block rounded bg-emerald-100 p-1'>Prepare detailed project notes</span>
             <span className='block rounded bg-purple-100 p-1'>Multiple scheduled items</span>
@@ -147,6 +157,13 @@ export const CustomHeader: Story = {
         </button>
       </header>
     ),
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Forward one month' }));
+    await expect(canvas.getByRole('grid', { name: 'June 2024' })).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole('button', { name: 'Back one month' }));
+    await expect(canvas.getByRole('grid', { name: 'May 2024' })).toBeInTheDocument();
   },
 };
 

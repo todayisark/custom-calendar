@@ -13,6 +13,7 @@ describe('Calendar', () => {
 
     const cells = getGridCells();
     expect(cells).toHaveLength(35);
+    expect(screen.getAllByRole('row')).toHaveLength(6);
     expect(cells[0]).toHaveAttribute('data-date', '2024-04-28');
     expect(cells[cells.length - 1]).toHaveAttribute('data-date', '2024-06-01');
     expect(screen.getByRole('gridcell', { name: 'Wednesday, May 1, 2024' })).not.toHaveAttribute(

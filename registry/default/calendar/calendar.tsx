@@ -211,42 +211,48 @@ export const Calendar = ({
         </div>
       )}
 
-      <div className={cn('mt-3 grid grid-cols-7', classNames?.weekdays)} role='row'>
-        {weekdays.map((weekday, index) => (
-          <div
-            key={weekday.day}
-            className={cn('text-center text-sm', classNames?.weekday)}
-            role='columnheader'
-          >
-            {renderWeekday?.({ ...weekday, index }) ?? weekday.label}
-          </div>
-        ))}
-      </div>
+      <div role='grid' aria-label={monthLabel}>
+        <div className={cn('mt-3 grid grid-cols-7', classNames?.weekdays)} role='row'>
+          {weekdays.map((weekday, index) => (
+            <div
+              key={weekday.day}
+              className={cn('text-center text-sm', classNames?.weekday)}
+              role='columnheader'
+            >
+              {renderWeekday?.({ ...weekday, index }) ?? weekday.label}
+            </div>
+          ))}
+        </div>
 
-      <div className={cn('grid grid-cols-7', classNames?.grid)} role='grid' aria-label={monthLabel}>
-        {days.map((day) => (
-          <button
-            key={day.dateKey}
-            type='button'
-            className={cn(
-              'min-w-0 text-left',
-              classNames?.day,
-              !day.isCurrentMonth && classNames?.dayOutside,
-              day.isToday && classNames?.dayToday,
-            )}
-            onClick={() => onDayClick?.(day)}
-            role='gridcell'
-            aria-label={new Intl.DateTimeFormat(locale, {
-              dateStyle: 'full',
-            }).format(day.date)}
-            aria-current={day.isToday ? 'date' : undefined}
-            data-date={day.dateKey}
-            data-outside={!day.isCurrentMonth || undefined}
-            data-today={day.isToday || undefined}
-          >
-            {renderDay?.(day) ?? day.date.getDate()}
-          </button>
-        ))}
+        <div className={cn('grid grid-cols-7', classNames?.grid)} role='rowgroup'>
+          {Array.from({ length: days.length / 7 }, (_, weekIndex) => (
+            <div key={weekIndex} className='contents' role='row'>
+              {days.slice(weekIndex * 7, weekIndex * 7 + 7).map((day) => (
+                <button
+                  key={day.dateKey}
+                  type='button'
+                  className={cn(
+                    'min-w-0 text-left',
+                    classNames?.day,
+                    !day.isCurrentMonth && classNames?.dayOutside,
+                    day.isToday && classNames?.dayToday,
+                  )}
+                  onClick={() => onDayClick?.(day)}
+                  role='gridcell'
+                  aria-label={new Intl.DateTimeFormat(locale, {
+                    dateStyle: 'full',
+                  }).format(day.date)}
+                  aria-current={day.isToday ? 'date' : undefined}
+                  data-date={day.dateKey}
+                  data-outside={!day.isCurrentMonth || undefined}
+                  data-today={day.isToday || undefined}
+                >
+                  {renderDay?.(day) ?? day.date.getDate()}
+                </button>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

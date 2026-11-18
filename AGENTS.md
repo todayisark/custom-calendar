@@ -26,7 +26,8 @@ commas.
 - During UI work, run `npm run storybook` and inspect the relevant deterministic Story.
 - After source or configuration changes, run `npm run check`.
 - Run `npm run test:browser` when rendering, interaction, CSS, stories, or Storybook configuration
-  changes. Run `npm run build-storybook` when Storybook build configuration changes.
+  changes; this also enforces automated accessibility checks. Run `npm run build-storybook` when
+  Storybook build configuration changes.
 - If a check fails, fix the cause; do not disable rules, skip tests, or accept stale snapshots.
 - At handoff, report each command actually run and its result. Clearly separate unrun checks and
   environment blockers from passing checks.

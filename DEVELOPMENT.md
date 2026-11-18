@@ -14,7 +14,8 @@ npm run storybook
 ```
 
 Storybook runs at `http://localhost:6006` with hot updates, Props Controls, generated docs, and the
-test panel. `npm run build-storybook` creates the ignored `storybook-static/` output.
+test and accessibility panels. `npm run build-storybook` creates the ignored `storybook-static/`
+output.
 
 Stories live in `stories/*.stories.tsx` and import the Registry source directly. To add one:
 
@@ -48,9 +49,14 @@ npx playwright install chromium
 npm run test:browser
 ```
 
-The browser suite uses Storybook's official Vitest addon. It smoke-tests every Story and runs each
-`play` interaction without requiring a separately running Storybook server. It complements unit
-tests; it does not prove visual equivalence or eliminate the need for UI review.
+The browser suite uses Storybook's official Vitest and accessibility addons. It smoke-tests every
+Story, runs each `play` interaction, and fails on axe accessibility violations without requiring a
+separately running Storybook server. It complements unit tests; it does not prove visual
+equivalence or eliminate the need for UI review.
+
+`CustomContent` and `LongContent` are tracked as accessibility TODOs because Calendar's fixed date
+label cannot include arbitrary visible text returned by `renderDay`. Keep those TODOs visible until
+the public API has an intentional accessible-label design; do not disable the underlying axe rule.
 
 ## Quality gate and CI
 

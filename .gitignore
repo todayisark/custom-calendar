@@ -1,4 +1,6 @@
 node_modules
 public/r
+storybook-static
+test-results
 *.tsbuildinfo
 .DS_Store

@@ -1,33 +1,32 @@
-# Project conventions
+# Agent guide
 
-## Code style
+## Architecture
 
-- Declare React components with arrow functions.
-- Prefer function expressions for ordinary functions; arrow functions are allowed.
-- Prefer `type` for TypeScript type definitions. Do not use `interface`.
-- Use single quotes and semicolons.
-- Prefer lines no longer than 100 characters.
-- Keep trailing commas in multiline structures.
-- Always wrap arrow function parameters in parentheses.
+- `registry/default/calendar/calendar.tsx` is the published Registry source and public API.
+- `stories/` imports that source directly; it contains deterministic Storybook scenarios only.
+- `registry/**/*.test.tsx` contains observable component behavior tests.
+- `.storybook/` and `vitest.config.ts` configure development and browser verification.
+- `public/r/` and `storybook-static/` are generated outputs. Do not edit them by hand.
 
-## Static analysis
+## Change rules
 
-- TypeScript checks unused variables and parameters.
-- ESLint reports unused imports as errors.
-- Preserve the core lint rules appropriate for the installed framework and tool versions. Do not
-  disable checks accidentally while migrating configuration.
-- When Prettier and ESLint overlap, configure them using the compatibility mechanism supported by
-  the installed versions. Prettier owns formatting; ESLint owns code-quality rules.
+- Preserve `CalendarProps` and exported types unless the task explicitly changes the public API.
+- Keep Storybook and test packages in `devDependencies`; consumers receive only Registry files.
+- Keep dates, images, and content in tests and stories deterministic.
+- Add or update a regression test for every reproducible bug. Test behavior, not DOM structure.
+- Do not change Calendar business behavior merely to satisfy a test. Document unexpected existing
+  behavior before widening the task.
 
-## Tooling changes
+Follow the repository's existing TypeScript, ESLint, and Prettier rules. Components are arrow
+functions, types use `type`, strings use single quotes, and multiline structures keep trailing
+commas.
 
-- Before upgrading or migrating a framework or tool, read the official documentation for the
-  version installed in this repository.
-- Do not copy configuration written for an older version, downgrade the core framework to silence
-  warnings, or remove core checks merely to make a command pass.
-- When cleaning generated templates, remove only confirmed unused demo assets and placeholder
-  copy. Keep dependencies and project infrastructure that are planned for use.
+## Verification
 
-## Required checks
-
-Run `npm run check` after changing source code or project configuration.
+- During UI work, run `npm run storybook` and inspect the relevant deterministic Story.
+- After source or configuration changes, run `npm run check`.
+- Run `npm run test:browser` when rendering, interaction, CSS, stories, or Storybook configuration
+  changes. Run `npm run build-storybook` when Storybook build configuration changes.
+- If a check fails, fix the cause; do not disable rules, skip tests, or accept stale snapshots.
+- At handoff, report each command actually run and its result. Clearly separate unrun checks and
+  environment blockers from passing checks.
